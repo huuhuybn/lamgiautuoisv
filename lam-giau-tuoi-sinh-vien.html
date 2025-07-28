@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làm Giàu Ở Độ Tuổi Sinh Viên - Thầy Huy Android</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .author-info {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 3px solid #667eea;
+            text-align: center;
+        }
+        
+        .author-info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .toc h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        
+        .toc li {
+            counter-increment: chapter;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .toc li:before {
+            content: counter(chapter) ". ";
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #667eea;
+        }
+        
+        .chapter {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .chapter:last-child {
+            border-bottom: none;
+        }
+        
+        .chapter h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .chapter h3 {
+            color: #495057;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .chapter h4 {
+            color: #6c757d;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            color: #495057;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .references {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .references h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .references ol {
+            list-style: decimal;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LÀM GIÀU Ở ĐỘ TUỔI SINH VIÊN</h1>
+            <h2>Hành trình từ sinh viên đến triệu phú</h2>
+        </div>
+        
+        <div class="author-info">
+            <h3>📚 Tác giả: Thầy Huy Android</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>0913360468</span>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>huuhuybn@gmail.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="highlight">
+                <h3>LỜI MỞ ĐẦU</h3>
+                <p>Chào mừng bạn đến với cuốn sách "Làm Giàu Ở Độ Tuổi Sinh Viên"!</p>
+                <p>Nếu bạn đang là sinh viên và mơ ước về một tương lai tài chính vững chắc, cuốn sách này sẽ là người bạn đồng hành tuyệt vời trên hành trình của bạn. Chúng ta sẽ khám phá những cách thức thực tế, những cơ hội đang chờ đợi, và những bài học quý giá từ những người đã thành công.</p>
+                <p><strong>Hãy nhớ rằng: Tuổi trẻ không phải là rào cản, mà là lợi thế lớn nhất của bạn!</strong></p>
+            </div>
+            
+            <div class="toc">
+                <h3>📋 MỤC LỤC</h3>
+                <ol>
+                    <li><a href="#chapter1">Tư Duy Đúng Đắn</a></li>
+                    <li><a href="#chapter2">Xây Dựng Nền Tảng Tài Chính</a></li>
+                    <li><a href="#chapter3">Kiếm Tiền Từ Kỹ Năng</a></li>
+                    <li><a href="#chapter4">Kinh Doanh Online</a></li>
+                    <li><a href="#chapter5">Đầu Tư Thông Minh</a></li>
+                    <li><a href="#chapter6">Tiết Kiệm Và Quản Lý Chi Tiêu</a></li>
+                    <li><a href="#chapter7">Xây Dựng Mạng Lưới</a></li>
+                    <li><a href="#chapter8">Phát Triển Bản Thân</a></li>
+                    <li><a href="#chapter9">Những Sai Lầm Cần Tránh</a></li>
+                    <li><a href="#chapter10">Kế Hoạch Hành Động</a></li>
+                </ol>
+            </div>
+            
+            <div id="chapter1" class="chapter">
+                <h2>CHƯƠNG 1: TƯ DUY ĐÚNG ĐẮN</h2>
+                
+                <h3>1.1 Thay Đổi Tư Duy Về Tiền Bạc</h3>
+                <div class="quote">
+                    "Tiền không phải là tất cả, nhưng nó là công cụ để đạt được tự do"
+                </div>
+                
+                <p>Là sinh viên, bạn cần hiểu rằng:</p>
+                <ul>
+                    <li>Tiền bạc không phải là mục đích cuối cùng</li>
+                    <li>Tiền là công cụ để tạo ra giá trị và tự do</li>
+                    <li>Thời gian là tài sản quý giá nhất của bạn</li>
+                </ul>
+                
+                <h3>1.2 Tư Duy Của Người Giàu</h3>
+                <p><strong>Những đặc điểm của người có tư duy giàu:</strong></p>
+                <ol>
+                    <li><strong>Tư duy dài hạn</strong>: Không chỉ nghĩ về hôm nay</li>
+                    <li><strong>Tư duy học hỏi</strong>: Luôn cập nhật kiến thức mới</li>
+                    <li><strong>Tư duy sáng tạo</strong>: Tìm cách giải quyết vấn đề</li>
+                    <li><strong>Tư duy rủi ro có kiểm soát</strong>: Dám thử nhưng có tính toán</li>
+                </ol>
+                
+                <h3>1.3 Xóa Bỏ Những Niềm Tin Giới Hạn</h3>
+                <div class="warning">
+                    <strong>Những câu nói cần tránh:</strong>
+                    <ul>
+                        <li>"Tôi còn trẻ, chưa thể kiếm tiền"</li>
+                        <li>"Tôi không có vốn"</li>
+                        <li>"Tôi không có kỹ năng"</li>
+                        <li>"Thị trường đã bão hòa"</li>
+                    </ul>
+                </div>
+                
+                <div class="success">
+                    <strong>Thay thế bằng:</strong>
+                    <ul>
+                        <li>"Tôi có thời gian và năng lượng để học hỏi"</li>
+                        <li>"Tôi có thể bắt đầu với số vốn nhỏ"</li>
+                        <li>"Tôi có thể học bất kỳ kỹ năng nào"</li>
+                        <li>"Luôn có cơ hội cho người sáng tạo"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="chapter2" class="chapter">
+                <h2>CHƯƠNG 2: XÂY DỰNG NỀN TẢNG TÀI CHÍNH</h2>
+                
+                <h3>2.1 Hiểu Về Dòng Tiền</h3>
+                <p><strong>Dòng tiền cơ bản:</strong></p>
+                <div class="code-block">
+                    Thu nhập → Chi tiêu → Tiết kiệm → Đầu tư
+                </div>
+                
+                <p><strong>Mục tiêu:</strong></p>
+                <ul>
+                    <li>Tăng thu nhập</li>
+                    <li>Giảm chi tiêu không cần thiết</li>
+                    <li>Tăng tỷ lệ tiết kiệm</li>
+                    <li>Đầu tư thông minh</li>
+                </ul>
+                
+                <h3>2.2 Nguyên Tắc 50/30/20</h3>
+                <p><strong>Phân chia thu nhập:</strong></p>
+                <ul>
+                    <li><strong>50%</strong>: Chi tiêu cần thiết (ăn, ở, đi lại, học phí)</li>
+                    <li><strong>30%</strong>: Chi tiêu mong muốn (giải trí, mua sắm)</li>
+                    <li><strong>20%</strong>: Tiết kiệm và đầu tư</li>
+                </ul>
+                
+                <h3>2.3 Xây Dựng Quỹ Khẩn Cấp</h3>
+                <p><strong>Mục tiêu:</strong> Tiết kiệm 3-6 tháng chi phí sinh hoạt</p>
+                
+                <p><strong>Cách thực hiện:</strong></p>
+                <ol>
+                    <li>Tính toán chi phí hàng tháng</li>
+                    <li>Đặt mục tiêu tiết kiệm cụ thể</li>
+                    <li>Tự động hóa việc tiết kiệm</li>
+                    <li>Tìm cách tăng thu nhập</li>
+                </ol>
+            </div>
+            
+            <div id="chapter3" class="chapter">
+                <h2>CHƯƠNG 3: KIẾM TIỀN TỪ KỸ NĂNG</h2>
+                
+                <h3>3.1 Freelancing - Công Việc Tự Do</h3>
+                <p><strong>Những kỹ năng có thể kiếm tiền:</strong></p>
+                
+                <h4>Kỹ năng kỹ thuật:</h4>
+                <ul>
+                    <li>Lập trình web/app</li>
+                    <li>Thiết kế đồ họa</li>
+                    <li>Viết content</li>
+                    <li>Dịch thuật</li>
+                    <li>SEO</li>
+                </ul>
+                
+                <h4>Kỹ năng mềm:</h4>
+                <ul>
+                    <li>Gia sư online</li>
+                    <li>Tư vấn marketing</li>
+                    <li>Quản lý mạng xã hội</li>
+                    <li>Tổ chức sự kiện</li>
+                </ul>
+                
+                <h3>3.2 Nền Tảng Freelancing</h3>
+                <p><strong>Các website uy tín:</strong></p>
+                <ul>
+                    <li>Upwork</li>
+                    <li>Fiverr</li>
+                    <li>Freelancer.com</li>
+                    <li>99designs (thiết kế)</li>
+                    <li>Topcoder (lập trình)</li>
+                </ul>
+                
+                <p><strong>Cách bắt đầu:</strong></p>
+                <ol>
+                    <li>Tạo profile chuyên nghiệp</li>
+                    <li>Bắt đầu với giá thấp để có đánh giá</li>
+                    <li>Xây dựng portfolio</li>
+                    <li>Tăng giá dần dần</li>
+                </ol>
+                
+                <h3>3.3 Gia Sư Online</h3>
+                <p><strong>Lợi thế của sinh viên:</strong></p>
+                <ul>
+                    <li>Kiến thức mới nhất</li>
+                    <li>Hiểu tâm lý học sinh</li>
+                    <li>Linh hoạt về thời gian</li>
+                    <li>Thu nhập ổn định</li>
+                </ul>
+                
+                <p><strong>Các môn học phổ biến:</strong></p>
+                <ul>
+                    <li>Toán, Lý, Hóa, Anh văn</li>
+                    <li>Lập trình</li>
+                    <li>Ngoại ngữ</li>
+                    <li>Âm nhạc, thể thao</li>
+                </ul>
+            </div>
+            
+            <div id="chapter4" class="chapter">
+                <h2>CHƯƠNG 4: KINH DOANH ONLINE</h2>
+                
+                <h3>4.1 Bán Hàng Online</h3>
+                <p><strong>Các mô hình kinh doanh:</strong></p>
+                
+                <h4>Dropshipping:</h4>
+                <ul>
+                    <li>Không cần vốn lớn</li>
+                    <li>Không cần kho hàng</li>
+                    <li>Rủi ro thấp</li>
+                    <li>Dễ bắt đầu</li>
+                </ul>
+                
+                <h4>Affiliate Marketing:</h4>
+                <ul>
+                    <li>Kiếm hoa hồng từ bán hàng</li>
+                    <li>Không cần sản phẩm riêng</li>
+                    <li>Thu nhập thụ động</li>
+                    <li>Dễ mở rộng</li>
+                </ul>
+                
+                <h3>4.2 Tạo Nội Dung Digital</h3>
+                <p><strong>Các nền tảng kiếm tiền:</strong></p>
+                <ul>
+                    <li>YouTube</li>
+                    <li>TikTok</li>
+                    <li>Instagram</li>
+                    <li>Blog</li>
+                    <li>Podcast</li>
+                </ul>
+                
+                <p><strong>Chiến lược thành công:</strong></p>
+                <ol>
+                    <li>Chọn niche phù hợp</li>
+                    <li>Tạo nội dung chất lượng</li>
+                    <li>Xây dựng cộng đồng</li>
+                    <li>Đa dạng hóa thu nhập</li>
+                </ol>
+                
+                <h3>4.3 Tạo Sản Phẩm Số</h3>
+                <p><strong>Các loại sản phẩm:</strong></p>
+                <ul>
+                    <li>Khóa học online</li>
+                    <li>Ebook</li>
+                    <li>Template, plugin</li>
+                    <li>App, game</li>
+                    <li>Nhạc, video</li>
+                </ul>
+                
+                <p><strong>Lợi thế:</strong></p>
+                <ul>
+                    <li>Chi phí sản xuất thấp</li>
+                    <li>Thu nhập thụ động</li>
+                    <li>Dễ mở rộng</li>
+                    <li>Không cần vốn lớn</li>
+                </ul>
+            </div>
+            
+            <div id="chapter5" class="chapter">
+                <h2>CHƯƠNG 5: ĐẦU TƯ THÔNG MINH</h2>
+                
+                <h3>5.1 Hiểu Về Đầu Tư</h3>
+                <p><strong>Nguyên tắc cơ bản:</strong></p>
+                <ul>
+                    <li>Đầu tư sớm = Lợi nhuận lớn</li>
+                    <li>Đa dạng hóa rủi ro</li>
+                    <li>Đầu tư dài hạn</li>
+                    <li>Không đầu tư tiền cần thiết</li>
+                </ul>
+                
+                <h3>5.2 Các Kênh Đầu Tư Cho Sinh Viên</h3>
+                
+                <h4>Tiết kiệm ngân hàng:</h4>
+                <ul>
+                    <li>An toàn, thanh khoản cao</li>
+                    <li>Lãi suất thấp</li>
+                    <li>Phù hợp quỹ khẩn cấp</li>
+                </ul>
+                
+                <h4>Chứng chỉ quỹ:</h4>
+                <ul>
+                    <li>Rủi ro thấp-trung bình</li>
+                    <li>Được quản lý chuyên nghiệp</li>
+                    <li>Phù hợp người mới</li>
+                </ul>
+                
+                <h4>Cổ phiếu:</h4>
+                <ul>
+                    <li>Rủi ro cao</li>
+                    <li>Lợi nhuận tiềm năng lớn</li>
+                    <li>Cần kiến thức và thời gian</li>
+                </ul>
+                
+                <h4>Crypto:</h4>
+                <ul>
+                    <li>Rủi ro rất cao</li>
+                    <li>Biến động lớn</li>
+                    <li>Chỉ đầu tư số tiền có thể mất</li>
+                </ul>
+                
+                <h3>5.3 Chiến Lược Đầu Tư</h3>
+                <p><strong>Dollar-Cost Averaging (DCA):</strong></p>
+                <ul>
+                    <li>Đầu tư đều đặn mỗi tháng</li>
+                    <li>Giảm rủi ro thời điểm</li>
+                    <li>Phù hợp người mới</li>
+                </ul>
+                
+                <p><strong>Portfolio đa dạng:</strong></p>
+                <ul>
+                    <li>40% chứng chỉ quỹ</li>
+                    <li>30% cổ phiếu</li>
+                    <li>20% tiết kiệm</li>
+                    <li>10% crypto (tùy chọn)</li>
+                </ul>
+            </div>
+            
+            <div id="chapter6" class="chapter">
+                <h2>CHƯƠNG 6: TIẾT KIỆM VÀ QUẢN LÝ CHI TIÊU</h2>
+                
+                <h3>6.1 Theo Dõi Chi Tiêu</h3>
+                <p><strong>Công cụ theo dõi:</strong></p>
+                <ul>
+                    <li>App quản lý tài chính</li>
+                    <li>Excel/Google Sheets</li>
+                    <li>Sổ tay ghi chép</li>
+                </ul>
+                
+                <p><strong>Phân loại chi tiêu:</strong></p>
+                <ul>
+                    <li>Chi tiêu cần thiết</li>
+                    <li>Chi tiêu mong muốn</li>
+                    <li>Chi tiêu đầu tư</li>
+                </ul>
+                
+                <h3>6.2 Cách Tiết Kiệm Hiệu Quả</h3>
+                <p><strong>Nguyên tắc 1%:</strong></p>
+                <ul>
+                    <li>Tăng tiết kiệm 1% mỗi tháng</li>
+                    <li>Tự động hóa việc tiết kiệm</li>
+                    <li>Tiết kiệm trước khi chi tiêu</li>
+                </ul>
+                
+                <p><strong>Mẹo tiết kiệm:</strong></p>
+                <ul>
+                    <li>Mua sắm thông minh</li>
+                    <li>Tận dụng ưu đãi sinh viên</li>
+                    <li>Nấu ăn tại nhà</li>
+                    <li>Sử dụng phương tiện công cộng</li>
+                </ul>
+                
+                <h3>6.3 Tối Ưu Hóa Chi Tiêu</h3>
+                <p><strong>Chi tiêu cho học tập:</strong></p>
+                <ul>
+                    <li>Mua sách cũ</li>
+                    <li>Chia sẻ tài liệu</li>
+                    <li>Tận dụng thư viện</li>
+                    <li>Học online miễn phí</li>
+                </ul>
+                
+                <p><strong>Chi tiêu sinh hoạt:</strong></p>
+                <ul>
+                    <li>Ở ký túc xá hoặc share phòng</li>
+                    <li>Nấu ăn thay vì ăn ngoài</li>
+                    <li>Sử dụng wifi công cộng</li>
+                    <li>Mua sắm theo mùa</li>
+                </ul>
+            </div>
+            
+            <div id="chapter7" class="chapter">
+                <h2>CHƯƠNG 7: XÂY DỰNG MẠNG LƯỚI</h2>
+                
+                <h3>7.1 Tầm Quan Trọng Của Networking</h3>
+                <p><strong>Lợi ích:</strong></p>
+                <ul>
+                    <li>Cơ hội việc làm</li>
+                    <li>Học hỏi kinh nghiệm</li>
+                    <li>Hợp tác kinh doanh</li>
+                    <li>Được giới thiệu</li>
+                </ul>
+                
+                <h3>7.2 Cách Xây Dựng Mạng Lưới</h3>
+                <p><strong>Trong trường học:</strong></p>
+                <ul>
+                    <li>Tham gia câu lạc bộ</li>
+                    <li>Kết nối với giảng viên</li>
+                    <li>Tham gia dự án nhóm</li>
+                    <li>Tham gia hội thảo</li>
+                </ul>
+                
+                <p><strong>Ngoài trường học:</strong></p>
+                <ul>
+                    <li>Tham gia meetup</li>
+                    <li>Sử dụng LinkedIn</li>
+                    <li>Tham gia khóa học</li>
+                    <li>Tình nguyện</li>
+                </ul>
+                
+                <h3>7.3 Kỹ Năng Giao Tiếp</h3>
+                <p><strong>Nguyên tắc:</strong></p>
+                <ul>
+                    <li>Lắng nghe tích cực</li>
+                    <li>Đặt câu hỏi thông minh</li>
+                    <li>Chia sẻ giá trị</li>
+                    <li>Duy trì liên lạc</li>
+                </ul>
+            </div>
+            
+            <div id="chapter8" class="chapter">
+                <h2>CHƯƠNG 8: PHÁT TRIỂN BẢN THÂN</h2>
+                
+                <h3>8.1 Kỹ Năng Cần Thiết</h3>
+                <p><strong>Kỹ năng cứng:</strong></p>
+                <ul>
+                    <li>Ngoại ngữ (đặc biệt là tiếng Anh)</li>
+                    <li>Công nghệ thông tin</li>
+                    <li>Phân tích dữ liệu</li>
+                    <li>Marketing digital</li>
+                </ul>
+                
+                <p><strong>Kỹ năng mềm:</strong></p>
+                <ul>
+                    <li>Giao tiếp</li>
+                    <li>Lãnh đạo</li>
+                    <li>Quản lý thời gian</li>
+                    <li>Giải quyết vấn đề</li>
+                </ul>
+                
+                <h3>8.2 Thói Quen Thành Công</h3>
+                <p><strong>Thói quen hàng ngày:</strong></p>
+                <ul>
+                    <li>Dậy sớm</li>
+                    <li>Đọc sách 30 phút</li>
+                    <li>Tập thể dục</li>
+                    <li>Lập kế hoạch ngày mai</li>
+                </ul>
+                
+                <p><strong>Thói quen hàng tuần:</strong></p>
+                <ul>
+                    <li>Đánh giá tuần qua</li>
+                    <li>Lập kế hoạch tuần mới</li>
+                    <li>Học kỹ năng mới</li>
+                    <li>Kết nối với người mới</li>
+                </ul>
+                
+                <h3>8.3 Tư Duy Học Hỏi</h3>
+                <p><strong>Nguyên tắc:</strong></p>
+                <ul>
+                    <li>Học từ mọi người</li>
+                    <li>Học từ thất bại</li>
+                    <li>Học liên tục</li>
+                    <li>Học thực hành</li>
+                </ul>
+            </div>
+            
+            <div id="chapter9" class="chapter">
+                <h2>CHƯƠNG 9: NHỮNG SAI LẦM CẦN TRÁNH</h2>
+                
+                <h3>9.1 Sai Lầm Về Tư Duy</h3>
+                <div class="warning">
+                    <strong>"Tôi sẽ bắt đầu khi có đủ tiền"</strong>
+                    <ul>
+                        <li>Thực tế: Bạn sẽ không bao giờ có đủ tiền</li>
+                        <li>Giải pháp: Bắt đầu với số vốn nhỏ</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>"Tôi cần phải hoàn hảo trước khi bắt đầu"</strong>
+                    <ul>
+                        <li>Thực tế: Hoàn hảo không tồn tại</li>
+                        <li>Giải pháp: Bắt đầu ngay, cải thiện dần</li>
+                    </ul>
+                </div>
+                
+                <h3>9.2 Sai Lầm Về Đầu Tư</h3>
+                <div class="warning">
+                    <strong>Đầu tư tất cả vào một nơi:</strong>
+                    <ul>
+                        <li>Rủi ro cao</li>
+                        <li>Có thể mất hết vốn</li>
+                        <li>Giải pháp: Đa dạng hóa</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>Đầu tư theo cảm xúc:</strong>
+                    <ul>
+                        <li>Mua khi giá cao</li>
+                        <li>Bán khi giá thấp</li>
+                        <li>Giải pháp: Chiến lược dài hạn</li>
+                    </ul>
+                </div>
+                
+                <h3>9.3 Sai Lầm Về Quản Lý Thời Gian</h3>
+                <div class="warning">
+                    <strong>Lãng phí thời gian:</strong>
+                    <ul>
+                        <li>Chơi game quá nhiều</li>
+                        <li>Lướt mạng xã hội</li>
+                        <li>Trì hoãn công việc</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>Không có kế hoạch:</strong>
+                    <ul>
+                        <li>Làm việc không hiệu quả</li>
+                        <li>Bỏ lỡ cơ hội</li>
+                        <li>Căng thẳng không cần thiết</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="chapter10" class="chapter">
+                <h2>CHƯƠNG 10: KẾ HOẠCH HÀNH ĐỘNG</h2>
+                
+                <h3>10.1 Lập Kế Hoạch 90 Ngày</h3>
+                
+                <h4>Tuần 1-4: Xây dựng nền tảng</h4>
+                <ul>
+                    <li>Thiết lập tài khoản tiết kiệm</li>
+                    <li>Bắt đầu theo dõi chi tiêu</li>
+                    <li>Tìm hiểu về đầu tư</li>
+                    <li>Xác định kỹ năng cần học</li>
+                </ul>
+                
+                <h4>Tuần 5-8: Bắt đầu kiếm tiền</h4>
+                <ul>
+                    <li>Tạo profile freelancing</li>
+                    <li>Bắt đầu gia sư online</li>
+                    <li>Tạo tài khoản mạng xã hội</li>
+                    <li>Bắt đầu tạo nội dung</li>
+                </ul>
+                
+                <h4>Tuần 9-12: Mở rộng và tối ưu</h4>
+                <ul>
+                    <li>Tăng thu nhập từ các nguồn</li>
+                    <li>Bắt đầu đầu tư</li>
+                    <li>Xây dựng mạng lưới</li>
+                    <li>Đánh giá và điều chỉnh</li>
+                </ul>
+                
+                <h3>10.2 Mục Tiêu Dài Hạn</h3>
+                
+                <h4>6 tháng:</h4>
+                <ul>
+                    <li>Có thu nhập ổn định từ freelancing</li>
+                    <li>Tiết kiệm được 3 tháng chi phí</li>
+                    <li>Bắt đầu đầu tư đều đặn</li>
+                </ul>
+                
+                <h4>1 năm:</h4>
+                <ul>
+                    <li>Thu nhập từ nhiều nguồn</li>
+                    <li>Có quỹ khẩn cấp đầy đủ</li>
+                    <li>Portfolio đầu tư đa dạng</li>
+                </ul>
+                
+                <h4>3 năm:</h4>
+                <ul>
+                    <li>Thu nhập thụ động đáng kể</li>
+                    <li>Có kinh doanh riêng</li>
+                    <li>Tài sản tăng trưởng ổn định</li>
+                </ul>
+                
+                <h3>10.3 Công Cụ Theo Dõi</h3>
+                <p><strong>Bảng theo dõi hàng tháng:</strong></p>
+                <ul>
+                    <li>Thu nhập từ các nguồn</li>
+                    <li>Chi tiêu theo danh mục</li>
+                    <li>Số tiền tiết kiệm</li>
+                    <li>Hiệu suất đầu tư</li>
+                </ul>
+                
+                <p><strong>Đánh giá định kỳ:</strong></p>
+                <ul>
+                    <li>Hàng tuần: Kiểm tra tiến độ</li>
+                    <li>Hàng tháng: Đánh giá tổng thể</li>
+                    <li>Hàng quý: Điều chỉnh chiến lược</li>
+                </ul>
+            </div>
+            
+            <div class="conclusion">
+                <h2>KẾT LUẬN</h2>
+                <p>Làm giàu ở độ tuổi sinh viên không phải là điều không thể. Điều quan trọng là bạn phải:</p>
+                <ol>
+                    <li><strong>Bắt đầu ngay hôm nay</strong> - Không chờ đợi điều kiện hoàn hảo</li>
+                    <li><strong>Học hỏi liên tục</strong> - Kiến thức là tài sản quý giá nhất</li>
+                    <li><strong>Hành động nhất quán</strong> - Thành công đến từ những hành động nhỏ mỗi ngày</li>
+                    <li><strong>Kiên nhẫn</strong> - Làm giàu là hành trình dài hạn</li>
+                </ol>
+                <p><strong>Hãy nhớ rằng: Tuổi trẻ là lợi thế lớn nhất của bạn!</strong></p>
+                <p>Bạn có thời gian để học hỏi, thử nghiệm và phục hồi từ thất bại. Hãy tận dụng tối đa những năm tháng sinh viên để xây dựng nền tảng tài chính vững chắc cho tương lai.</p>
+                <div class="quote">
+                    "Thành công không phải là đích đến, mà là hành trình"
+                </div>
+                <p><strong>Chúc bạn thành công trên con đường làm giàu!</strong></p>
+            </div>
+            
+            <div class="references">
+                <h3>TÀI LIỆU THAM KHẢO</h3>
+                <ol>
+                    <li>"Rich Dad Poor Dad" - Robert Kiyosaki</li>
+                    <li>"The Millionaire Fastlane" - MJ DeMarco</li>
+                    <li>"Think and Grow Rich" - Napoleon Hill</li>
+                    <li>"The Psychology of Money" - Morgan Housel</li>
+                    <li>"Atomic Habits" - James Clear</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>📚 LÀM GIÀU Ở ĐỘ TUỔI SINH VIÊN</strong></p>
+            <p>Tác giả: Thầy Huy Android</p>
+            <p>📞 0913360468 | 📧 huuhuybn@gmail.com</p>
+            <p><em>Cuốn sách này được viết với mong muốn giúp các bạn sinh viên có được những kiến thức và công cụ cần thiết để bắt đầu hành trình làm giàu từ sớm. Hãy chia sẻ kiến thức này với bạn bè và gia đình để cùng nhau phát triển!</em></p>
+        </div>
+    </div>
+</body>
+</html> 
