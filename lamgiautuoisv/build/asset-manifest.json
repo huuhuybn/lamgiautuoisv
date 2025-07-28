@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/lamgiautuoisv/static/css/main.9008bfe1.css",
+    "main.js": "/lamgiautuoisv/static/js/main.915bd640.js",
+    "static/js/453.a8a6af11.chunk.js": "/lamgiautuoisv/static/js/453.a8a6af11.chunk.js",
+    "index.html": "/lamgiautuoisv/index.html",
+    "main.9008bfe1.css.map": "/lamgiautuoisv/static/css/main.9008bfe1.css.map",
+    "main.915bd640.js.map": "/lamgiautuoisv/static/js/main.915bd640.js.map",
+    "453.a8a6af11.chunk.js.map": "/lamgiautuoisv/static/js/453.a8a6af11.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9008bfe1.css",
+    "static/js/main.915bd640.js"
+  ]
+}
