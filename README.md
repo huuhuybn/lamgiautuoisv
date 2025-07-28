@@ -22,12 +22,12 @@ Cuốn sách bao gồm 10 chương chính:
 ## 🚀 Cách sử dụng
 
 ### Xem online
-- Mở file `lam-giau-tuoi-sinh-vien.html` trong trình duyệt
+- Mở file `index.html` trong trình duyệt
 - Hoặc truy cập: [Link sẽ được cập nhật sau khi deploy]
 
 ### Download
 - Clone repository này về máy
-- Mở file HTML trong trình duyệt
+- Mở file `index.html` trong trình duyệt
 
 ## 👨‍🏫 Tác giả
 
